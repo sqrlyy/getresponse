@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GetResponse</title>
+</head>
+<body>
+<form method="post">
+    <table>
+        <tr>
+            <th>Choose segment</th>
+            <th>
+                <select name="segment" id="segment">
+                     {% for segment in segments %}
+                         <option value="{{ segment.searchContactId }}" >{{ segment.name }}</option>
+                     {% endfor %}
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <th>Count messages in a day</th>
+            <th><input type="number" name="count" id="count"></th>
+        </tr>
+        <th>Choose tag</th>
+        <th>
+            <select name="tag" id="tag">
+                    {% for tag in tags %}
+                        <option value="{{ tag.tagId }}" >{{ tag.name }}</option>
+                    {% endfor %}
+            </select>
+        </th>
+    </table>
+    <input type="submit" class="btn btn-success">
+</form>
+</body>
+</html>
