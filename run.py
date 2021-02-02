@@ -10,7 +10,8 @@ FlaskCLI(app)
 
 
 @app.cli.command()
-def cron():
+def test():
+    print('CRON STARTED')
     cron_info = Segment.query.all()
     for inf in cron_info:
         segment_contacts = requests.get(current_app.config['URL_SEGMENTS'] + '/' + inf.segment + '/contacts',
@@ -22,3 +23,4 @@ def cron():
                 requests.post('https://api.getresponse.com/v3/contacts/' + segment_contacts[i]['contactId'],
                               headers=current_app.config['HEADERS_AUTH'], data=json.dumps({"tags": [inf.tag]}))
                 i += 1
+            print("CRON STOPPED")
