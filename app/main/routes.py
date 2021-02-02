@@ -6,17 +6,6 @@ import requests
 import json
 from flask import current_app
 
-def cron():
-    cron_info = Information.query.all()
-    for inf in cron_info:
-        segment_contacts = requests.get(URL_SEGMENTS + '/' + inf.segment + '/contacts', headers=headers_auth)
-        if segment_contacts is not None and segment_contacts.status_code == 200:
-            segment_contacts = json.loads(segment_contacts.text)
-            i = 0
-            while i < inf.count:
-                requests.post('https://api.getresponse.com/v3/contacts/' + segment_contacts[i]['contactId'],
-                              headers=headers_auth, data=json.dumps({"tags": [inf.tag]}))
-                i += 1
 
 @bp.route('/', methods=['POST', 'GET'])
 def hello_world():
